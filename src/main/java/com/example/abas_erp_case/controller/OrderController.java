@@ -3,6 +3,8 @@ package com.example.abas_erp_case.controller;
 import com.example.abas_erp_case.entity.OrderEntity;
 import com.example.abas_erp_case.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
@@ -20,8 +22,9 @@ public class OrderController {
     }
 
     @PostMapping
-    public void saveOrder(@RequestBody OrderEntity orderEntity) {
+    public ResponseEntity<String> saveOrder(@RequestBody OrderEntity orderEntity) {
         orderService.saveOrder(orderEntity);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Order saved successfully.");
     }
 
     @GetMapping("/totalAmount")
